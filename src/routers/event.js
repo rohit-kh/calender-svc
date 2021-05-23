@@ -29,7 +29,7 @@ router.get('/events', auth, async (req, res) => {
 	let startAt = moment(req.query.startAt, 'DD-MM-YYYY', true);
 	let endAt = moment(req.query.endAt, 'DD-MM-YYYY', true);
 	if(!(startAt.isValid() && endAt.isValid() && startAt.isSameOrBefore(endAt))){
-		res.status(400).send({error: 'Invalid date format. Please use DD-MM-YYYY format'})
+		throw new Error('Invalid date format. Please use DD-MM-YYYY format')
 	}
 
 	startAt = startAt.format('YYYY-MM-DD')
@@ -46,7 +46,7 @@ router.get('/events', auth, async (req, res) => {
 		})
 		res.send(events)
 	}catch (e) {
-		res.status(500).send({error: e.message})
+		res.status(400).send({error: e.message})
 	}
 })
 

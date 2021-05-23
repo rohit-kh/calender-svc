@@ -22,11 +22,19 @@ const eventOne = {
     owner: userOneId
 }
 
+const eventTwo = {
+    startAt: '2021-06-16 10:00:00',
+    endAt: '2021-06-16 11:00:00',
+    title: 'Test Two',
+    owner: userOneId
+}
+
 const setupDatabase = async () => {
     await User.deleteMany()
     await Event.deleteMany()
     await new User(userOne).save()
     await new Event(eventOne).save()
+    await new Event(eventTwo).save()
 }
 
 module.exports = {
